@@ -8,7 +8,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { RangePickerProps } from "antd/es/date-picker";
 import { FilterConfirmProps } from "antd/es/table/interface";
 import { LcaTableData } from '@/components/lca-table/formatters';
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import compareAsc from "date-fns/compareAsc";
 import { LCAData } from "@/types/lca";
 interface Props {
@@ -108,11 +108,14 @@ export function LCATable({ lcaData }: Props) {
         return true;
       }
   })
-
+  
   // format table columns with filters based on pulled data
   const [formattedColumnsWithFilter, setFormattedColumnsWithFilter] =
-        useState<ColumnsType<LcaTableData>>(
-          formatColumnTypesWithFilters(BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps));
+        useState<ColumnsType<LcaTableData>>(BASE_LCA_TABLE_COLUMNS);
+
+  useMemo(() => {
+    formatColumnTypesWithFilters(BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps)
+  }, [formatColumnTypesWithFilters, BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps])
 
   //update the filters for the columns when the receivedDateFilter or decisionDateFilter is updated
   useEffect(() => {

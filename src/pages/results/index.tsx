@@ -10,7 +10,7 @@ const { Title } = Typography;
 const { darkAlgorithm, defaultAlgorithm } = theme;
 
 export default function Page() {
-  const { data: lcaData, isLoading } = trpc.useQuery(['lca.findAll']);
+  // const { data: lcaData, isLoading } = trpc.useQuery(['lca.findAll']);
 
   return (
     <ConfigProvider theme={{algorithm: darkAlgorithm}}>
@@ -18,8 +18,9 @@ export default function Page() {
           <Content>
             <Title style={{textAlign: "left", margin: "24px 32px"}}>H1B1 Visa</Title>
             <div style={{ padding: 24, minHeight: 360, background: "black"}}>
-                {isLoading && <div style={{height:"100vh", width: '100%', background: "black"}}><Spin size='large' /></div>}
-                {!isLoading && lcaData && <LCATable lcaData={lcaData} />}
+                {/* {isLoading && <div style={{height:"100vh", width: '100%', background: "black"}}><Spin size='large' /></div>}
+                {!isLoading && lcaData && <LCATable lcaData={lcaData} />} */}
+                <LCATable lcaData={[]} />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Built by{' '}
