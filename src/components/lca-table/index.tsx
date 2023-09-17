@@ -111,11 +111,12 @@ export function LCATable({ lcaData }: Props) {
   
   // format table columns with filters based on pulled data
   const [formattedColumnsWithFilter, setFormattedColumnsWithFilter] =
-        useState<ColumnsType<LcaTableData>>(formatColumnTypesWithFilters(BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps));
+        useState<ColumnsType<LcaTableData>>(BASE_LCA_TABLE_COLUMNS);
 
-  // useMemo(() => {
-  //   formatColumnTypesWithFilters(BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps)
-  // }, [formatColumnTypesWithFilters, BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps])
+  useMemo(() => {
+    formatColumnTypesWithFilters(BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps)
+    setFormattedColumnsWithFilter(BASE_LCA_TABLE_COLUMNS);
+  }, [formatColumnTypesWithFilters, BASE_LCA_TABLE_COLUMNS, lcaDataSource, getDateColumnSearchProps, setFormattedColumnsWithFilter])
 
   //update the filters for the columns when the receivedDateFilter or decisionDateFilter is updated
   useEffect(() => {
